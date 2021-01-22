@@ -7,9 +7,18 @@ public class Main {
 
     public static void main(String[] args) {
         int secret = generateRandom();
-        int guess = scanner.nextInt();
-        getGrade(secret, guess);
-        System.out.printf("The secret code is %d.", secret);
+        System.out.println("Okay, let's start a game!");
+        int turn = 1;
+        while (true) {
+            System.out.printf("Turn %d:%n", turn);
+            int guess = scanner.nextInt();
+            int bulls = getGrade(secret, guess);
+            if (bulls == String.valueOf(secret).length()) {
+                break;
+            }
+            turn++;
+        }
+        System.out.println("Congratulations! You guessed the secret code.");
     }
 
     public static int generateRandom() {
@@ -18,9 +27,8 @@ public class Main {
             while (true) {
                 long pseudoRandomNumber = Long.reverse(System.nanoTime());
                 try {
-                    String temp = (pseudoRandomNumber + "").substring(0, length);
+                    String temp = String.valueOf(pseudoRandomNumber).substring(0, length);
                     if (checkUniqueDigits(temp)) {
-                        System.out.println("The random secret number is " + temp);
                         return Integer.parseInt(temp);
                     }
                 } catch (Exception e) {
@@ -45,13 +53,14 @@ public class Main {
         return isUnique;
     }
 
-    public static void getGrade(int secret, int guess) {
+    public static int getGrade(int secret, int guess) {
+        int length = String.valueOf(secret).length();
         int tempSecret = secret;
         int bulls = 0;
         int cows = 0;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < length; i++) {
             int numDigit = guess % 10;
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < length; j++) {
                 int secDigit = tempSecret % 10;
                 if (numDigit == secDigit) {
                     if (i == j) {
@@ -67,9 +76,10 @@ public class Main {
         }
 
         if (bulls != 0 || cows != 0) {
-            System.out.printf("Grade: %d bull(s) and %d cow(s)", bulls, cows);
+            System.out.printf("Grade: %d bull(s) and %d cow(s)%n", bulls, cows);
         } else {
             System.out.println("Grade: None.");
         }
+        return bulls;
     }
 }
