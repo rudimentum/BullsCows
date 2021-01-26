@@ -1,6 +1,7 @@
 package bullscows;
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
     final static Scanner scanner = new Scanner(System.in);
@@ -22,10 +23,12 @@ public class Main {
     }
 
     public static int generateRandom() {
+        Random random = new Random();
         int length = scanner.nextInt();
         if (length < 11 && length > 0) {
+            double upper = Math.pow(10, length);
             while (true) {
-                long pseudoRandomNumber = Long.reverse(System.nanoTime());
+                int pseudoRandomNumber = random.nextInt((int) upper);
                 try {
                     String temp = String.valueOf(pseudoRandomNumber).substring(0, length);
                     if (checkUniqueDigits(temp)) {
