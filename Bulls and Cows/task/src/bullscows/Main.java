@@ -1,5 +1,6 @@
 package bullscows;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -24,17 +25,25 @@ public class Main {
 
     public static int generateRandom() {
         Random random = new Random();
-        int length = scanner.nextInt();
+        int length = 0;
+
+        while (true) {
+            try {
+                length = scanner.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input! Use integers from 1 to 10");
+                scanner.next();
+            }
+        }
+
         if (length < 11 && length > 0) {
             double upper = Math.pow(10, length);
             while (true) {
                 int pseudoRandomNumber = random.nextInt((int) upper);
-                try {
-                    String temp = String.valueOf(pseudoRandomNumber).substring(0, length);
-                    if (checkUniqueDigits(temp)) {
-                        return Integer.parseInt(temp);
-                    }
-                } catch (Exception e) {
+                String temp = String.valueOf(pseudoRandomNumber);
+                if (temp.length() == length && checkUniqueDigits(temp)) {
+                    return Integer.parseInt(temp);
                 }
             }
         } else {
