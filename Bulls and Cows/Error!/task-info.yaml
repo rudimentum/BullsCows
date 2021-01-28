@@ -407,6 +407,27 @@ files:
         }
     }
   learner_created: false
+- name: src/bullscows/BullsCows.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/53/stages/293/implement
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #7
+
+    The program continued work after an incorrect input.
+
+    Please find below the output of your program during this failed test.
+    Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
+
+    ---
+
+    Input the length of the secret code:
+    &gt; 0
+    Input the number of possible symbols in the code:
+    &gt; 1
+    Error: can&#39;t generate a secret number with a length of 0 because there aren&#39;t enough unique digits.
+    Input the length of the secret code:
+  time: Thu, 28 Jan 2021 20:29:11 UTC
 record: -1
