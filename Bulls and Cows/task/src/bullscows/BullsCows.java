@@ -8,8 +8,8 @@ public class BullsCows {
     final static Scanner scanner = new Scanner(System.in);
 
     public static String getSecret() {
-        int length = 0;
-        int charsRange = 0;
+        int length;
+        int charsRange;
         while (true) {
             try {
                 System.out.println("Input the length of the secret code:");
@@ -37,6 +37,14 @@ public class BullsCows {
         return guess;
     }
 
+    /**
+     * Generate a secret code containing numbers 0-9 and lowercase Latin characters a-z
+     * Print the secret code using * characters
+     * Print which characters were used to generate the secret code
+     * @param length
+     * @param charsRange
+     * @return randomly generated secret code
+     */
     public static String generateRandom(int length, int charsRange) {
         Random random = new Random();
         while (true) {
@@ -51,7 +59,6 @@ public class BullsCows {
             }
             String generatedString = buffer.toString();
             String secret = generatedString;
-            System.out.println(secret);
             if (secret.length() == length && checkUniqueDigits(secret)) {
                 System.out.printf("The secret is prepared: %s %s%n", prepareAsterisks(length), prepareRanges(charsRange));
                 return secret;
@@ -63,6 +70,11 @@ public class BullsCows {
         return "*".repeat(length);
     }
 
+    /**
+     * Check the number of possible characters in the code to notify the user about allowed ranges
+     * @param charsRange
+     * @return characters were used to generate the secret code
+     */
     public static String prepareRanges(int charsRange) {
         int d = charsRange < 9 ? charsRange - 1 : 9;
         char c;
