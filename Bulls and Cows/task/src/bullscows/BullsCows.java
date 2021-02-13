@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class BullsCows {
     final static Scanner scanner = new Scanner(System.in);
 
-    public static String getSecret() {
+    public String getSecret() {
         int length;
         int charsRange;
         while (true) {
@@ -32,20 +32,17 @@ public class BullsCows {
         return getSecret();
     }
 
-    public static String inputGuess() {
-        String guess = scanner.next();
-        return guess;
+    public String inputGuess() {
+        return scanner.next();
     }
 
     /**
      * Generate a secret code containing numbers 0-9 and lowercase Latin characters a-z
      * Print the secret code using * characters
      * Print which characters were used to generate the secret code
-     * @param length
-     * @param charsRange
      * @return randomly generated secret code
      */
-    public static String generateRandom(int length, int charsRange) {
+    public String generateRandom(int length, int charsRange) {
         Random random = new Random();
         while (true) {
             StringBuilder buffer = new StringBuilder(length);
@@ -57,8 +54,7 @@ public class BullsCows {
                 char c = (char) n;
                 buffer.append(c);
             }
-            String generatedString = buffer.toString();
-            String secret = generatedString;
+            String secret = buffer.toString();
             if (secret.length() == length && checkUniqueDigits(secret)) {
                 System.out.printf("The secret is prepared: %s %s%n", prepareAsterisks(length), prepareRanges(charsRange));
                 return secret;
@@ -66,13 +62,12 @@ public class BullsCows {
         }
     }
 
-    public static String prepareAsterisks(int length) {
+    public String prepareAsterisks(int length) {
         return "*".repeat(length);
     }
 
     /**
      * Check the number of possible characters in the code to notify the user about allowed ranges
-     * @param charsRange
      * @return characters were used to generate the secret code
      */
     public static String prepareRanges(int charsRange) {
@@ -86,7 +81,7 @@ public class BullsCows {
         return String.format("(0-%d, a-%c)", d, c);
     }
 
-    public static boolean checkUniqueDigits(String str) {
+    public boolean checkUniqueDigits(String str) {
         boolean isUnique = true;
         for (int i = 0; i < str.length(); i++) {
             for (int j = i + 1; j < str.length(); j++) {
@@ -99,7 +94,7 @@ public class BullsCows {
         return isUnique;
     }
 
-    public static int getGrade(String secret, String guess) {
+    public int getGrade(String secret, String guess) {
         int bulls = 0;
         int cows = 0;
         for (int i = 0; i < secret.length(); i++) {
